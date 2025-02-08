@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_blue_plus_linux-2.0.0" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_blue_plus_web-2.0.0" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_blue_plus_android-2.0.1" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_blue_plus-1.35.2" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_blue_plus_darwin-2.0.1" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/fluttertoast-8.2.11" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
