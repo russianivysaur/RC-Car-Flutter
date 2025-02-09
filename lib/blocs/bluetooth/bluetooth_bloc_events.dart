@@ -12,7 +12,8 @@ class ChangeBluetoothStateEvent extends BluetoothBlocEvent{
 
 class StartScanEvent extends BluetoothBlocEvent{}
 
-class ScanCompletedEvent extends BluetoothBlocEvent{
-  List<ScanResult> scanResults;
-  ScanCompletedEvent(this.scanResults);
+
+class ConnectToDeviceEvent extends BluetoothBlocEvent{
+  BluetoothDevice device;
+  ConnectToDeviceEvent(this.device);
 }

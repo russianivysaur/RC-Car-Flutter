@@ -7,7 +7,16 @@ class BluetoothOffState extends BluetoothBlocState{}
 
 class BluetoothOnState extends BluetoothBlocState{}
 
-class ScanCompletedState extends BluetoothBlocState{
+class ScanResultsState extends BluetoothBlocState{
   List<ScanResult> scanResults;
-  ScanCompletedState(this.scanResults);
+  ScanResultsState(this.scanResults);
+}
+
+class ScanCompletedState extends BluetoothBlocState{
+
+}
+
+class ConnectedState extends BluetoothBlocState{
+  BluetoothCharacteristic characteristic;
+  ConnectedState(this.characteristic);
 }

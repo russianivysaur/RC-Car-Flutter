@@ -10,7 +10,7 @@ class BluetoothBloc extends Bloc<BluetoothBlocEvent,BluetoothBlocState> {
   BluetoothBloc(super.initialState,this.repo){
     on<ChangeBluetoothStateEvent>(changeBluetoothState);
     on<StartScanEvent>(scan);
-    on<ScanCompletedEvent>(scanCompleted);
+    on<ConnectToDeviceEvent>(connectToDevice);
     startBluetooth();
   }
 
@@ -32,8 +32,7 @@ class BluetoothBloc extends Bloc<BluetoothBlocEvent,BluetoothBlocState> {
 
   void scan(event,emit) async {
     var sub = FlutterBluePlus.onScanResults.listen((results){
-      Resources.logger.log(results.toString());
-      add(ScanCompletedEvent(results));
+      emit(ScanResultsState(results));
     });
     FlutterBluePlus.cancelWhenScanComplete(sub);
     await FlutterBluePlus.adapterState.where((val) => val == BluetoothAdapterState.on).first;
@@ -42,9 +41,24 @@ class BluetoothBloc extends Bloc<BluetoothBlocEvent,BluetoothBlocState> {
 
     await FlutterBluePlus.isScanning.where((val) => val == false).first;
     Resources.logger.log("end of scan");
+    emit(ScanCompletedState());
   }
 
-  void scanCompleted(ScanCompletedEvent event,emit) {
-    emit(ScanCompletedState(event.scanResults));
+
+
+  void connectToDevice(ConnectToDeviceEvent event,emit) async{
+    await event.device.connect();
+    List<BluetoothService> services = await event.device.discoverServices();
+    for(BluetoothService service in services) {
+      if(service.uuid.toString() == "12345678-1234-5678-1234-56789abcdef0"){
+        List<BluetoothCharacteristic> characteristics = service.characteristics;
+        for(BluetoothCharacteristic characteristic in characteristics) {
+          if(characteristic.uuid.toString() == "12345678-1234-5678-1234-56789abcdef1"){
+            emit(ConnectedState(characteristic));
+          }
+        }
+      }
+    }
   }
+
 }
